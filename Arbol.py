@@ -69,25 +69,46 @@ class Arbol:
         return True
         
 
-root = Node("A")
-node_b = Node("B")
-node_c = Node("C")
-node_d = Node("D")
-node_e = Node("E")
-node_f = Node("f")
-node_g = Node("G")
-node_h = Node("H")
+# root = Node("A")
+# node_b = Node("B")
+# node_c = Node("C")
+# node_d = Node("D")
+# node_e = Node("E")
+# node_f = Node("f")
+# node_g = Node("G")
+# node_h = Node("H")
 
-root.addSon(node_b)
-root.addSon(node_c)
-root.addSon(node_d)
-node_b.addSon(node_e)
-node_b.addSon(node_f)
-node_c.addSon(node_g)
-node_e.addSon(node_h)
+# root.addSon(node_b)
+# root.addSon(node_c)
+# root.addSon(node_d)
+# node_b.addSon(node_e)
+# node_b.addSon(node_f)
+# node_c.addSon(node_g)
+# node_e.addSon(node_h)
 
+# arbol = Arbol(root)
+# arbol.Imprimir()
+# print("peso:",arbol.peso())
+# print("Altura:",arbol.Altura())
+# print("Orden:",arbol.orden())
+
+raiz_dato = input("Ingrese el dato de la raíz: ")
+root = Node(raiz_dato)
 arbol = Arbol(root)
+
+
+while True:
+    padre = input("Nodo padre donde insertar (o 'fin' para terminar): ")
+    if padre.lower() == 'fin':
+        break
+    dato = input("  Dato del nuevo nodo: ")
+    correcto = arbol.insert(padre, dato)
+    if not correcto:
+        print("  >> No se insertó, intente de nuevo.")
+
+
+print("\nÁrbol en niveles:")
 arbol.Imprimir()
-print("peso:",arbol.peso())
-print("Altura:",arbol.Altura())
-print("Orden:",arbol.orden())
+print(f"Peso del árbol: {arbol.peso()}")
+print(f"Altura del árbol: {arbol.Altura()}")
+print(f"Grado del árbol: {arbol.orden()}")
