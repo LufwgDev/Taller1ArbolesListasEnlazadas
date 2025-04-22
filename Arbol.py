@@ -11,7 +11,7 @@ class Arbol:
         self.root = root
     
     def ImprimirNivel(self, nodo, nivel=0):
-        print(' '*nivel+str(nodo.data))
+        print(' '*6*nivel+str(nodo.data))
         for son in nodo.sons:
                 self.ImprimirNivel(son,nivel+1)
                 
@@ -47,8 +47,28 @@ class Arbol:
     
     def orden(self):
         return self.calcularOrden(self.root)
-                
-            
+    
+    def find(self, data, nodo=None):
+        if nodo is None:
+            nodo = self.root
+        if nodo.data == data:
+            return nodo
+        for hijo in nodo.sons:
+            res = self.find(data, hijo)
+            if res:
+                return res
+        return None
+
+    def insert(self, parent_data, new_data):
+        padre = self.find(parent_data)
+        if not padre:
+            print(f"Nodo '{parent_data}' no encontrado.")
+            return False
+        nuevo = Node(new_data)
+        padre.addSon(nuevo)
+        return True
+        
+
 root = Node("A")
 node_b = Node("B")
 node_c = Node("C")
