@@ -1,3 +1,7 @@
+#By 
+#Juan Manuel Rivera Torres - 2240046
+#Luis Felipe Rueda García  - 2240021
+
 class Node:
     def __init__(self,data):
         self.data = data
@@ -32,9 +36,9 @@ class Arbol:
     
     def CalcularAltura(self,nodo):
         if not nodo.sons:
-            return 0
-        else:
-            return 1 + max(self.CalcularAltura(h) for h in nodo.sons)
+            return 1
+        return 1 + max(self.CalcularAltura(h) for h in nodo.sons)
+
         
     def Altura(self):
        return self.CalcularAltura(self.root)
@@ -67,7 +71,18 @@ class Arbol:
         nuevo = Node(new_data)
         padre.addSon(nuevo)
         return True
-        
+    
+    def MostrarRelaciones(self, nodo=None):
+        if nodo is None:
+            nodo = self.root
+
+        if nodo.sons:
+            hijos = ', '.join(h.data for h in nodo.sons)
+            print(f"{nodo.data} -> [{hijos}]")
+
+        for h in nodo.sons:
+            self.MostrarRelaciones(h)
+
 
 # root = Node("A")
 # node_b = Node("B")
@@ -109,6 +124,10 @@ while True:
 
 print("\nÁrbol en niveles:")
 arbol.Imprimir()
+
+print("\nRelaciones padre → hijos:")
+arbol.MostrarRelaciones()
+
 print(f"Peso del árbol: {arbol.peso()}")
 print(f"Altura del árbol: {arbol.Altura()}")
 print(f"Grado del árbol: {arbol.orden()}")
